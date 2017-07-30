@@ -19,10 +19,35 @@ S３に分析する対象の非構造化データをフォルダを作ってい�
 <div align="center">
   <p width="450px" src="https://user-images.githubusercontent.com/4949982/28753094-7f3067e4-7569-11e7-8740-e13b21c9c2fd.png">
 </div>
+
 フォルダに必要なデータを適切に配置して、awscliのコンフィグレーションを通した状態で、次のコマンドでHadoop Streamingを実行します  
+
 ```console
-aws emr add-steps --cluster-id j-{$YOUR_EMR_ID} --steps file://./WordCount_step.json --region ap-northeast-1
+$ aws emr add-steps --cluster-id j-{$YOUR_EMR_ID} --steps file://./WordCount_step.json --region ap-northeast-1
 ```
+
+ここで、引数に指定されている　JSONファイルはこのような記述になっています  
+```json
+[
+  {
+     "Name": "WordCount",
+     "Type": "STREAMING",
+     "ActionOnFailure": "CONTINUE",
+     "Args": [
+         "-files",
+         "s3://{$YOUR_S3}/wordcount-code/mapper,s3://{$YOUR_S3}/wordcount-code/reducer",
+         "-mapper",
+         "mapper",
+         "-reducer",
+         "reducer",
+         "-input",
+         "s3://{$YOUR_S3}/wordcount-dataset/",
+         "-output",
+         "s3://{$YOUR_S3}/wordcount-result"]
+  }
+]
+```
+（注：これはGoでバイナリを指定しているので、pythonやrubyの場合、適切にfilesの引数を変えてください）
 
 ## Python2でのワードカウント
 各種インターネット上の文献では、Python2でワードカウントしていることが多い  
