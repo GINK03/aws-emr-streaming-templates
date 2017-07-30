@@ -122,3 +122,33 @@ rpmは[ここのサイトから](https://github.com/feedforce/ruby-rpm/releases)
 $ sudo yum remove ruby
 $ sudo yum install ./ruby-2.4.1-1.el6.x86_64.rpm
 ```
+
+### mapper
+```ruby
+#!/usr/bin/ruby
+STDIN.each_line { |x|
+  x.split(" ").map { |x| 
+    puts sprintf("%s\t1", x.downcase)
+  }
+}
+```
+
+### reducer
+```ruby
+#!/usr/bin/ruby
+term_freq = {}
+STDIN.each_line { |x| 
+  term, freq = x.split("\t")
+  if term_freq[term] == nil  then 
+    term_freq[term] = 0
+  end
+  term_freq[term] += 1
+}
+
+term_freq.each { |term, freq| 
+  puts sprintf("%s %d", term, freq)
+}
+```
+
+全体的にみて、PythonよりRubyの方がスッキリかけますね  
+好みの問題でありますが、好きな言語で良いと思います
