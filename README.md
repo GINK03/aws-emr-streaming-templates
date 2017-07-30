@@ -7,6 +7,7 @@ Map Reduceの仕組み自体は古いのですが、論文にもなっており�
 <div align="center">
   <img width="450px" src="https://user-images.githubusercontent.com/4949982/28753294-9aee0e74-756d-11e7-9eaf-97c5906f890f.png">
 </div>
+<div align="center"> 図1. イメージしているところのMapReduceの構成 </div>
 
 AWSのElastic Map Reduceを利用してHadoop Streamingで任意の言語で、ビッグデータを処理する方法を説明します  
 
