@@ -117,5 +117,8 @@ if __name__ == "__main__":
 
 AWS EMRのノードにインストールされているバージョンは古く、アップデートします  
 
-      if term_freq.get(term) == None:に
-      if term_freq.get(term) == Non
+rpmは[ここのサイトから](https://github.com/feedforce/ruby-rpm/releases)ダウンロードしました
+```console
+$ sudo yum remove ruby
+$ sudo yum install ./ruby-2.4.1-1.el6.x86_64.rpm
+```
