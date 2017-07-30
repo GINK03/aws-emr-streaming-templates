@@ -18,7 +18,7 @@ $ sudo yum install python35-pip
 ```
 
 ### mapper
-```cosnole
+```python
 #!/usr/bin/python3
 import sys
 import re
@@ -33,7 +33,7 @@ if __name__ == "__main__":
 ```
 
 ### reducer
-```console
+```python
 #!/usr/bin/python3
 import sys
 import re
