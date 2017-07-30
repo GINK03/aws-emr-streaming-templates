@@ -112,4 +112,10 @@ if __name__ == "__main__":
 ```
 
 ## Rubyでのワードカウント
+世の中には、Rubiestが多く、PythonでなくてRubyでやりたいという人も多いです  
+悪くない選択肢でもあるので、使い方を説明します
 
+AWS EMRのノードにインストールされているバージョンは古く、アップデートします  
+
+      if term_freq.get(term) == None:に
+      if term_freq.get(term) == Non
