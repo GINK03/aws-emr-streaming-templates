@@ -2,7 +2,7 @@
 
 GCPのDataFlowの方が、AWS EMRより個人的にはモダンな印象があるのですが、業務でAWSで非構造化データの大規模な分析が必要になる可能性があり、Hadoop Streamingの仕組みを軽くおさらいして、いくつかの言語で動かしました　　
 
-Map Reduceの仕組み自体は古いのですが、論文にもなっており、この構成でほとんどの集計が可能みたいなことを言っており、パワーを感じます  
+Map Reduceの仕組み自体は古いのですが、論文にもなっており、この構成でほとんどの集計が可能みたいなことを言っており、パワーを感じます[1]  
 
 <div align="center">
   <img width="450px" src="https://user-images.githubusercontent.com/4949982/28753294-9aee0e74-756d-11e7-9eaf-97c5906f890f.png">
@@ -279,3 +279,6 @@ func main() {
         }
 }
 ```
+
+## 参考文献
+[1] [MapReduce: Simplified Data Processing on Large Clusters](https://static.googleusercontent.com/media/research.google.com/ja//archive/mapreduce-osdi04.pdf)
