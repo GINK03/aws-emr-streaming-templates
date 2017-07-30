@@ -162,4 +162,70 @@ term_freq.each { |term, freq|
 ```
 
 全体的にみて、PythonよりRubyの方がスッキリかけますね  
-好みの問題でありますが、好きな言語で良いと思います
+
+好みの問題でありますが、好きな言語で良いと思います  
+
+## Goでのワードカウント
+私がstreamingにおいて、スクリプト言語より、速度やメモリリソースや、シングルバイナリになるという点で、良いと感じているのが、Go言語です  
+
+Go言語はそのシンプルなシンタックスでありながら、ランタイムに依存することなく、実行可能なバイナリを出力が可能です  
+
+つまり、AWS EMRのノードに対して、なんらかログインしてソフトウェアをインストールやセットアップをする必要がありません  
+
+### mapper
+```go
+package main
+
+import (
+        "bufio"
+        "fmt"
+        "os"
+        "strings"
+)
+
+func main() {
+        scanner := bufio.NewScanner(os.Stdin)
+        for scanner.Scan() {
+                line := scanner.Text()
+                terms := strings.Split(line, " ")
+                for _, term := range terms {
+                        out := fmt.Sprintf("%s\t1", term)
+                        fmt.Println(out)
+                }
+        }
+}
+```
+
+### reducer
+```go
+package main
+
+import (
+        "bufio"
+        "fmt"
+        "os"
+        "strings"
+)
+
+func main() {
+        dic := map[string]int{}
+        scanner := bufio.NewScanner(os.Stdin)
+        for scanner.Scan() {
+                line := scanner.Text()
+                ents := strings.Split(line, "\t")
+                term := ents[0]
+                _ = ents[1]
+
+                _, ok := dic[term]
+                if ok == false {
+                        dic[term] = 0
+                }
+                dic[term] += 1
+        }
+
+        for term, freq := range dic {
+                out := fmt.Sprintf("%s %d", term, freq)
+                fmt.Println(out)
+        }
+}
+```
