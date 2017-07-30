@@ -62,11 +62,11 @@ $ aws emr add-steps --cluster-id j-{$YOUR_EMR_ID} --steps file://./WordCount_ste
 （注：これはGoでバイナリを指定しているので、pythonやrubyの場合、適切にfilesの引数を変えてください）
 
 ## Python2でのワードカウント
-各種インターネット上の文献では、Python2でワードカウントしていることが多い  
+各種インターネット上の文献では、Python2でワードカウントしていることが多いです  
 
 AWSの解説サイトで紹介されていた方法で、集計する  
 
-Reducerを特別な予約関数を割り当てることができるが、ボトムアップ的に学ぶには、実装してしまった方が良いだろうという判断である  
+Reducerを特別な予約関数を割り当てることで省略できますが、ボトムアップ的に学ぶには、実装してしまった方が良いだろうという判断をしました  
 
 ### mapper
 ```python
@@ -173,7 +173,7 @@ if __name__ == "__main__":
 ```
 
 ## Rubyでのワードカウント
-世の中には、Rubiestが多く、PythonでなくてRubyでやりたいという人も多いです  
+世の中には、Rubyestが多く、PythonでなくてRubyでやりたいという人も多いです  
 悪くない選択肢でもあるので、使い方を説明します
 
 AWS EMRのノードにインストールされているバージョンは古く、アップデートします  
@@ -213,7 +213,7 @@ term_freq.each { |term, freq|
 
 全体的にみて、PythonよりRubyの方がスッキリかけますね  
 
-好みの問題でありますが、好きな言語で良いと思います  
+好みの問題である気がしてて、好きな言語で良いと思います  
 
 ## Goでのワードカウント
 私がstreamingにおいて、スクリプト言語より、速度やメモリリソースや、シングルバイナリになるという点で、良いと感じているのが、Go言語です  
@@ -279,6 +279,11 @@ func main() {
         }
 }
 ```
+
+## まとめ
+いくつかの言語において、実際に、AWS EMRを動かして集計しました  
+
+PythonやRubyおける使い方は、数年前からあまり進化を感じられませんが、Go言語という選択が可能になったことで、goroutineによる効率的な並列処理や、実行可能なバイナリであるというメモリが少なく済んだりするメリットがあるので、今までの集計方では集められなかった角度のデータが取得できそうで、未来が見えました  
 
 ## 参考文献
 [1] [MapReduce: Simplified Data Processing on Large Clusters](https://static.googleusercontent.com/media/research.google.com/ja//archive/mapreduce-osdi04.pdf)
