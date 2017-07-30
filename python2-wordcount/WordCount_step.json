@@ -1,0 +1,18 @@
+[
+  {
+     "Name": "WordCount",
+     "Type": "STREAMING",
+     "ActionOnFailure": "CONTINUE",
+     "Args": [
+         "-files",
+         "s3://irep-emr/wordcount-code/mapper.py,s3://irep-emr/wordcount-code/reducer.py",
+         "-mapper",
+         "mapper.py",
+         "-reducer",
+         "reducer.py",
+         "-input",
+         "s3://ap-northeast-1.elasticmapreduce.samples/wordcount/data/",
+         "-output",
+         "s3://irep-emr/wordcount-result03"]
+  }
+]
