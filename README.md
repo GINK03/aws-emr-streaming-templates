@@ -1,14 +1,13 @@
 # AWS Elastic Map Reduce Hadoop Examples
 
 AWSのElastic Map Reduceを利用してHadoop Streamingで任意の言語で、ビッグデータを処理する方法を説明する  
+
 任意の言語で処理をつなげることができるため、AWS EMR(Hadoop Streaming)の仕組みさえ理解していれば、好きな言語で処理が可能である
 
 ここでは、以下の言語におけるもっとも簡単な集計である、全てのドキュメントになんの語が何回出現するか、カウントするプログラムを例示する
 1. Python2
 2. Python3
-3. Ruby ( 2.4 
-
-)
+3. Ruby ( 2.4 )  
 4. Go ( 1.8 )
 
 
