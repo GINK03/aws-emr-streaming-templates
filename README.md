@@ -11,7 +11,18 @@ AWSのElastic Map Reduceを利用してHadoop Streamingで任意の言語で、�
 4. Go ( 1.8 )
 
 ## S3にデータをおく
+S３に分析する対象の非構造化データをフォルダを作っていれておきます　　
 
+生データか、GZで圧縮されている必要があります  
+
+例えば、一つのバケットで処理する場合には、このようなフォルダ構成をとります  
+<div align="center">
+  <p width="450px" src="https://user-images.githubusercontent.com/4949982/28753094-7f3067e4-7569-11e7-8740-e13b21c9c2fd.png">
+</div>
+フォルダに必要なデータを適切に配置して、awscliのコンフィグレーションを通した状態で、次のコマンドでHadoop Streamingを実行します  
+```console
+aws emr add-steps --cluster-id j-{$YOUR_EMR_ID} --steps file://./WordCount_step.json --region ap-northeast-1
+```
 
 ## Python2でのワードカウント
 各種インターネット上の文献では、Python2でワードカウントしていることが多い  
