@@ -1,4 +1,4 @@
-# AWS Elastic Map Reduce Hadoop Examples
+# AWS Elastic Map Reduce Streaming Examples
 
 GCPのDataFlowの方が、AWS EMRより個人的にはモダンな印象があるのですが、業務でAWSで非構造化データの大規模な分析が必要になる可能性があり、Hadoop Streamingの仕組みを軽くおさらいして、いくつかの言語で動かしました　　
 
