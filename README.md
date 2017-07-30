@@ -10,6 +10,8 @@ AWSのElastic Map Reduceを利用してHadoop Streamingで任意の言語で、�
 3. Ruby ( 2.4 )  
 4. Go ( 1.8 )
 
+## S3にデータをおく
+
 
 ## Python2でのワードカウント
 各種インターネット上の文献では、Python2でワードカウントしていることが多い  
