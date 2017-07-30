@@ -1,0 +1,18 @@
+[
+  {
+     "Name": "WordCount",
+     "Type": "STREAMING",
+     "ActionOnFailure": "CONTINUE",
+     "Args": [
+         "-files",
+         "s3://irep-emr/wordcount-code/mapper,s3://irep-emr/wordcount-code/reducer",
+         "-mapper",
+         "mapper",
+         "-reducer",
+         "reducer",
+         "-input",
+         "s3://irep-emr/dataset/",
+         "-output",
+         "s3://irep-emr/wordcount-result06"]
+  }
+]
