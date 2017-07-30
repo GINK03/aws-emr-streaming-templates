@@ -280,6 +280,8 @@ func main() {
         }
 }
 ```
+## コード
+[GITHUB](https://github.com/GINK03/aws-emr-streaming-templates)
 
 ## まとめ
 いくつかの言語において、実際に、AWS EMRを動かして集計しました  
