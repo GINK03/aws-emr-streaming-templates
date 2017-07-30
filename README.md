@@ -10,5 +10,12 @@ AWSのデフォルトのセキュリティグループについては、sshで�
 $ ssh -i {$KEY} hadoop@{$IPADDR}
 ```
 
+Python35のインストール(必要に応じでバージョンを切り替えてください)
+```cosnole
+$ sudo yum install python35
+$ sudo yum install python35-devel
+$ sudo yum install python35-pip
+```
+
 ## Rubyでのワードカウント
 
