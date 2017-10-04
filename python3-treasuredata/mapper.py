@@ -38,12 +38,12 @@ def main(argv):
       if src is None:
         continue
       date_time = obj['date_time']
-      key = 'serialized/{}_{}.pkl'.format(tuuid, data_owner_id) 
+      key = '{}_{}'.format(tuuid, data_owner_id) 
       tosave = { date_time : [keyword, src, domain, data_owner_id, gender_age] }
       print(key + '\t' + json.dumps(tosave) )
 
   except Exception as e:
-    print('SOME DEEP error occured!', e)
+    print('SOME DEEP error occured!', e, file=sys.stderr)
 
 if __name__ == "__main__":
     main(sys.argv)
