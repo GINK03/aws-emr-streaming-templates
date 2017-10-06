@@ -41,7 +41,31 @@ def bundle():
   #_bundles( [0] ) # これはテスト,例外が生じるような際に、強制的にシングルプロセスで動作ささせると落ちるので、それを利用する
   with concurrent.futures.ProcessPoolExecutor(max_workers=16) as executor:
     executor.map( _bundles, names )
-    
+
+def _reversed_shrink(key):
+  results = []
+  for eg, name in enumerate( glob.glob('flatten/*.json') ):
+    ents = name.split('/').pop().split('_')
+    data_owner_id = ents[0]
+    gender_age = ents[1]
+    _key = data_owner_id + '_' + gender_age
+    if eg%100 == 0:
+      print( key, eg, name )
+    if key != _key:
+      continue
+    obj  = list( filter(lambda x:x!=None, json.loads( open(name).read() ) ) )
+    trim = list( map(lambda x:x.replace('&', ''), filter(lambda x:x!=None, list( itertools.takewhile(lambda x:x!='CV', obj) ) ) ) )
+    trim.append( 'CV' )
+    if len( trim ) == 1: # CVしかなかったらスキップ
+      continue
+    ts = []
+    for t in list(reversed(trim)):
+      if len(ts) == 0:
+        ts.append( t )
+      if ts[-1] != t:
+        ts.append( t )
+    results.append( ts )
+  open('results/{key}_result.pkl'.format(key=key), 'wb').write( pickle.dumps(results) )
 def reversed_shrink():
   keys = set()
   for name in glob.glob('flatten/*.json'):
@@ -50,37 +74,22 @@ def reversed_shrink():
     gender_age = ents[1]
     key = data_owner_id + '_' + gender_age
     keys.add( key )
-  for key in keys:
-    results = []
-    for eg, name in enumerate( glob.glob('flatten/*.json') ):
-      data_owner_id = ents[0]
-      gender_age = ents[1]
-      _key = data_owner_id + '_' + gender_age
-      if eg%100 == 0:
-        print( key, eg, name )
-      if key != _key:
-        continue
-      obj  = list( filter(lambda x:x!=None, json.loads( open(name).read() ) ) )
-      trim = list( map(lambda x:x.replace('&', ''), filter(lambda x:x!=None, list( itertools.takewhile(lambda x:x!='CV', obj) ) ) ) )
-      trim.append( 'CV' )
-      if len( trim ) == 1: # CVしかなかったらスキップ
-        continue
-      ts = []
-      for t in list(reversed(trim)):
-        if len(ts) == 0:
-          ts.append( t )
-        if ts[-1] != t:
-          ts.append( t )
-      results.append( ts )
-    open('results/{key}_result.pkl'.format(key=key), 'wb').write( pickle.dumps(results) )
+  #for key in keys:
+  keys = list(keys)
+  #for key in keys:
+  #  print(key)
+  #  _reversed_shrink(key)
+  with concurrent.futures.ProcessPoolExecutor(max_workers=16) as executor:
+    executor.map( _reversed_shrink, keys )
 
 def make():
   for name in glob.glob('results/*.pkl'):
+    print( name )
     result = pickle.loads(open(name, 'rb').read() )
     key_freq = {}
     for seq in result:
-      print( seq )
-      for i in range(1, len(seq)+1):
+      #for i in range(1, len(seq)+1):
+      for i in range(1, 5+1):
         key = '/'.join( seq[0:i] )
         if key_freq.get( key ) is None:
           key_freq[key] = 0
