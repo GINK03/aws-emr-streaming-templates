@@ -4,17 +4,20 @@ import re
 import json
 
 def main(argv):
-  key_vals = {} 
+  scaning = 'init' 
+  buff = {}
   for line in sys.stdin:
     line = line.strip()
     key, val = line.split('\t')
     val = json.loads(val)
-    if key_vals.get( key ) is None:
-      key_vals[key] = {}
-    
-    for timestamp, meta in val.items():  
-      key_vals[key][timestamp] = meta
-  for key, vals in key_vals.items():
-    print(key + '\t' + json.dumps(vals, ensure_ascii=False) )
+    timestamp = list(val.keys()).pop()
+    meta = list(val.values()).pop()
+    if scaning == key:
+      buff[timestamp] = meta
+    if scaning != key:
+      print(scaning + '\t' + json.dumps(buff, ensure_ascii=False) )
+      # update scaning to new key
+      scaning = key
+      buff = val
 if __name__ == "__main__":
     main(sys.argv)
