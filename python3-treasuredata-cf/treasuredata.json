@@ -1,0 +1,18 @@
+[
+  {
+     "Name": "TreasureData",
+     "Type": "STREAMING",
+     "ActionOnFailure": "CONTINUE",
+     "Args": [
+         "-files",
+         "s3://ml-treasuredata/ml-treasuredata/mapper.py,s3://ml-treasuredata/ml-treasuredata/reducer.py",
+         "-mapper",
+         "mapper.py",
+         "-reducer",
+         "reducer.py",
+         "-input",
+         "s3://ml-treasuredata/20170825/*",
+         "-output",
+         "s3://ml-treasuredata/20170825-result-cf"]
+  }
+]
