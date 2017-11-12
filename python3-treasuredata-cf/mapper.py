@@ -37,7 +37,7 @@ def main(argv):
         continue
       date_time = obj['date_time']
       key = '{}_{}'.format(tuuid, data_owner_id) 
-      tosave = { date_time : keyword }
+      tosave = { date_time : [ '{}_{}'.format(k, data_owner_id) for k in keyword ] }
       print(key + '\t' + json.dumps(tosave, ensure_ascii=False) )
 
   except Exception as e:
