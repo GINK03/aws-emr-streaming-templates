@@ -13,6 +13,6 @@
          "-input",
          "s3://ml-treasuredata/20170825/*",
          "-output",
-         "s3://ml-treasuredata/20170825-result-cf"]
+         "s3://ml-treasuredata/20170825-result-cf-bind-allsite"]
   }
 ]
