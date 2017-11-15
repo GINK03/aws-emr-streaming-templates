@@ -2,14 +2,18 @@
 import sys
 import re
 import json
-
+import pickle
+import codecs
 def main(argv):
   scaning = 'init' 
   buff = []
   for line in sys.stdin:
     line = line.strip()
     key, val = line.split('\t')
-    val = json.loads(val)
+    try:
+      val = pickle.loads(codecs.decode(val.encode(), "base64"))
+    except Exception as e:
+      continue
     if scaning == key:
       buff.append(val)
     if scaning != key:

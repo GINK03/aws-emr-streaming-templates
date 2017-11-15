@@ -5,12 +5,17 @@ import json
 import urllib
 import urllib.parse
 import hashlib
+import codecs
+import pickle
 def main(argv):
   try:
     for line in sys.stdin:
       line = line.strip()
       obj  = json.loads( line )
       data_owner_id = obj['data_owner_id']
+      '''skip suumo(6517)'''
+      if data_owner_id == 6517:
+        continue
       gender_age = obj['gender_age']
       tuuid = obj['tuuid']
       if tuuid == None or tuuid == 'null' or tuuid == 'opt-out':
@@ -21,18 +26,23 @@ def main(argv):
       #print(dec)
       src = re.search(r'src=(.*?)&', dec)
       ref = re.search(r'ref=(.*?)&', dec)
+      if src is None or ref is None:
+        continue
       domain = None
       if src is not None:
         src = src.group(1)
       if ref is not None:
         ref = ref.group(1)
+      if src is None or ref is None:
+        continue
       date_time = obj['date_time']
       key = '{}'.format(tuuid) 
-      tosave = (date_time, ref, src)
-      print(key + '\t' + json.dumps(tosave, ensure_ascii=False) )
+      tosave = (date_time, data_owner_id, ref, src)
+      print(key + '\t' + codecs.encode(pickle.dumps(tosave),'base64').decode().replace('\n', '') )
 
   except Exception as e:
-    print('SOME DEEP error occured!', e, file=sys.stderr)
+    print('SOME DEEP error occured!\t' + str(e))
+    ...
 
 if __name__ == "__main__":
     main(sys.argv)
