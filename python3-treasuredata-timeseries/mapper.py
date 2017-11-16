@@ -26,7 +26,10 @@ def main():
       tuuid = obj['tuuid']
       if tuuid == None or tuuid == 'null' or tuuid == 'opt-out':
         ''' if there is no tuuid, fill tuuid filed as ip-addr + browser '''
-        tuuid =  'sha256_' + hashlib.sha256( bytes(obj['ip'] + obj['useragent'],'utf8') ).hexdigest()
+        try:
+          tuuid =  'sha256_' + hashlib.sha256( bytes(obj['ip'] + obj['useragent'],'utf8') ).hexdigest()
+        except TypeError as e:
+          continue
       request_uri = obj['request_uri']
       try:
         dec         = urllib.parse.unquote( urllib.parse.unquote(request_uri) )
