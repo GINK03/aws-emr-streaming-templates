@@ -10,10 +10,7 @@ def main(argv):
   for line in sys.stdin:
     line = line.strip()
     key, val = line.split('\t')
-    try:
-      val = pickle.loads(codecs.decode(val.encode(), "base64"))
-    except Exception as e:
-      continue
+    val = json.loads(val)
     if scaning == key:
       buff.append(val)
     if scaning != key:
