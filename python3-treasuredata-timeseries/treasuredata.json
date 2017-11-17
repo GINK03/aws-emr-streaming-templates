@@ -5,14 +5,14 @@
      "ActionOnFailure": "CONTINUE",
      "Args": [
          "-files",
-         "s3://ml-treasuredata/ml-treasuredata/mapper.py,s3://ml-treasuredata/ml-treasuredata/reducer.py",
+         "s3://ml-treasuredata-02/mapred/mapper.py,s3://ml-treasuredata-02/mapred/reducer.py",
          "-mapper",
          "mapper.py",
          "-reducer",
          "reducer.py",
          "-input",
-         "s3://ml-treasuredata/20171115/export.0**.*.jsonl.gz",
+         "s3://ml-treasuredata-02/20171115/export.***.*.jsonl.gz",
          "-output",
-         "s3://ml-treasuredata/20171116-result-shrink"]
+         "s3://ml-treasuredata-02/result-20171118"]
   }
 ]
