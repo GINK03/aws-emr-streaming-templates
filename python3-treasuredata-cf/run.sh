@@ -1,1 +1,1 @@
-aws emr add-steps --cluster-id j-2IYVVL1J8KOTN --steps file://./treasuredata.json --region ap-northeast-1
+aws emr add-steps --cluster-id j-1RAJ2HE5OSOW4 --steps file://./treasuredata.json --region ap-northeast-1

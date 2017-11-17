@@ -5,7 +5,7 @@
      "ActionOnFailure": "CONTINUE",
      "Args": [
          "-files",
-         "s3://ml-treasuredata/ml-treasuredata/mapper.py,s3://ml-treasuredata/ml-treasuredata/reducer.py",
+         "s3://ml-treasuredata/w2v/mapper.py,s3://ml-treasuredata/w2v/reducer.py",
          "-mapper",
          "mapper.py",
          "-reducer",
@@ -13,6 +13,6 @@
          "-input",
          "s3://ml-treasuredata/20171115/*",
          "-output",
-         "s3://ml-treasuredata/20171115-result-cf-bind-allsite"]
+         "s3://ml-treasuredata/result-20171115-w2v"]
   }
 ]

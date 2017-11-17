@@ -25,7 +25,7 @@ def main(argv):
       dec         = urllib.parse.unquote( urllib.parse.unquote(request_uri) )
       keyword     = re.search(r'ipao9702=(.*?)&', dec)
       if keyword is not None:
-        keyword = [ keyword.group(1) ]
+        keyword = [ 'SEARCH_' + keyword.group(1) ]
       else: 
         keyword = re.findall(r'mtk=(.*?)&', dec)
       src = re.search(r'src=(.*?)&', dec)
@@ -41,7 +41,7 @@ def main(argv):
         continue
       date_time = obj['date_time']
       key = '{}'.format(tuuid) 
-      tosave = { date_time : [ '{}_{}'.format(k, data_owner_id) for k in keyword ] }
+      tosave = { date_time : {'src':src, 'data_owner_id':data_owner_id, 'keywords': [ '{}'.format(k) for k in keyword ] } }
       print(key + '\t' + json.dumps(tosave, ensure_ascii=False) )
 
   except Exception as e:
