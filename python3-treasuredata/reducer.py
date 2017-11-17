@@ -15,7 +15,8 @@ def main(argv):
     if scaning == key:
       buff[timestamp] = meta
     if scaning != key:
-      print(scaning + '\t' + json.dumps(buff, ensure_ascii=False) )
+      if buff != {}:
+        print(scaning + '\t' + json.dumps(buff, ensure_ascii=False) )
       # update scaning to new key
       scaning = key
       buff = val
