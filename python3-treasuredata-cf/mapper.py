@@ -40,7 +40,7 @@ def main(argv):
       if src is None:
         continue
       date_time = obj['date_time']
-      key = '{}'.format(tuuid) 
+      key = '{}_{}'.format(tuuid, data_owner_id) 
       tosave = { date_time : {'src':src, 'data_owner_id':data_owner_id, 'keywords': [ '{}'.format(k) for k in keyword ] } }
       print(key + '\t' + json.dumps(tosave, ensure_ascii=False) )
 
