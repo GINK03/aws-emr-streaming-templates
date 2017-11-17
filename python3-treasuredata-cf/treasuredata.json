@@ -11,8 +11,8 @@
          "-reducer",
          "reducer.py",
          "-input",
-         "s3://ml-treasuredata/20170825/*",
+         "s3://ml-treasuredata/20171115/*",
          "-output",
-         "s3://ml-treasuredata/20170825-result-cf-bind-allsite"]
+         "s3://ml-treasuredata/20171115-result-cf-bind-allsite"]
   }
 ]

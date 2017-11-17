@@ -11,12 +11,16 @@ def main(argv):
       obj  = json.loads( line )
       data_owner_id = obj['data_owner_id']
       gender_age = obj['gender_age']
-      if gender_age is None:
+      income = obj['income']
+      if gender_age is None or income is None:
         continue
       tuuid = obj['tuuid']
       if tuuid == None or tuuid == 'null' or tuuid == 'opt-out':
         ''' if there is no tuuid, fill tuuid filed as ip-addr + browser '''
-        tuuid =  'sha256_' + hashlib.sha256( bytes(obj['ip'] + obj['useragent'],'utf8') ).hexdigest()
+        try:
+          tuuid =  'sha256_' + hashlib.sha256( bytes(obj['ip'] + obj['useragent'],'utf8') ).hexdigest()
+        except Exception as e:
+          continue
       request_uri = obj['request_uri']
       dec         = urllib.parse.unquote( urllib.parse.unquote(request_uri) )
       keyword     = re.search(r'ipao9702=(.*?)&', dec)
