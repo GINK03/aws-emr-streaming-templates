@@ -19,7 +19,7 @@ def _map1(name):
     for term, freq in val.items(): 
       key_term_freq[key][term] = 0 
     key_term_freq[key][term] += freq
-  save_name = 'shrink/{}'.format(name.split('/').pop())
+  save_name = 'shrink/{}.pkl.gz'.format(name.split('/').pop())
   open(save_name,'wb').write( gzip.compress(pickle.dumps(key_term_freq)) )
 
 if '--map1' in sys.argv:
@@ -29,8 +29,10 @@ if '--map1' in sys.argv:
 
 if '--reduce1' in sys.argv:
   key_term_freq = {}
-  for name in glob.glob('shrink/*'):
-    print(name)
+  files = glob.glob('shrink/*.pkl.gz')
+  size = len(files)
+  for index, name in enumerate( files ):
+    print(name, index, '/', size)
     _key_term_freq = pickle.loads( gzip.decompress( open(name, 'rb').read() ) )
     for key, term_freq in _key_term_freq.items():
       if key_term_freq.get(key) is None:
