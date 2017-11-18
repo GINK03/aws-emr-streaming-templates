@@ -11,7 +11,7 @@
          "-reducer",
          "reducer.py",
          "-input",
-         "s3://ml-treasuredata/result-20171117/*",
+         "s3://ml-treasuredata/result-20171117/part-*",
          "-output",
          "s3://ml-persona-reports/result-20171118"]
   }

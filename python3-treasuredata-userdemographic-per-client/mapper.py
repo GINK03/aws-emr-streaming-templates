@@ -42,7 +42,8 @@ def main():
           doi_key_keyword_freq[data_owner_id][key][keyword] = 0
         doi_key_keyword_freq[data_owner_id][key][keyword] += 1
     for doi, key_keyword_freq in doi_key_keyword_freq.items():
-      print(str(doi) + '\t' + json.dumps(key_keyword_freq, ensure_ascii=False) )
+      for key, keyword_freq in key_keyword_freq.items():
+        print('{doi}_{key}'.format(doi=doi, key=key) + '\t' + json.dumps(keyword_freq, ensure_ascii=False) )
 
 
 if __name__ == "__main__":
