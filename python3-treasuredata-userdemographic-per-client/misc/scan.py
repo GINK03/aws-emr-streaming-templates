@@ -11,6 +11,7 @@ def _map1(name):
   print(name)
   for line in open(name):
     line = line.strip()
+    print(line)
     key, val = line.split('\t')
     val = json.loads(val)
 
@@ -19,11 +20,13 @@ def _map1(name):
     for term, freq in val.items(): 
       key_term_freq[key][term] = 0 
     key_term_freq[key][term] += freq
+    print( term, key_term_freq[key][term] )
   save_name = 'shrink/{}.pkl.gz'.format(name.split('/').pop())
   open(save_name,'wb').write( gzip.compress(pickle.dumps(key_term_freq)) )
 
 if '--map1' in sys.argv:
   names = [name for name in glob.glob('result-20171118/part-*')]
+  _map1(names[0])
   with concurrent.futures.ProcessPoolExecutor(max_workers=16) as exe:
     exe.map(_map1, names)
 
@@ -41,6 +44,7 @@ if '--reduce1' in sys.argv:
         if key_term_freq[key].get(term) is None:
           key_term_freq[key][term] = 0
         key_term_freq[key][term] += freq
+        print( key_term_freq[key][term]  )
   now = datetime.now()
   year_month = '%04d_%02d'%(now.year, now.month)
   f = open('output_{}.txt'.format(year_month), 'w')

@@ -20,7 +20,7 @@ def main():
 
     if len(key_term_freq) >= 2:
       for key, term_freq in key_term_freq.items():
-        print(key, term_freq)
+        print(key + '\t' + json.dumps(term_freq, ensure_ascii=False) )
       key_term_freq = {}
 if __name__ == "__main__":
     main()
