@@ -1,0 +1,18 @@
+[
+  {
+     "Name": "TreasureData",
+     "Type": "STREAMING",
+     "ActionOnFailure": "CONTINUE",
+     "Args": [
+         "-files",
+         "s3://ml-persona-reports/mapred/mapper.py,s3://ml-persona-reports/mapred/reducer.py",
+         "-mapper",
+         "mapper.py",
+         "-reducer",
+         "reducer.py",
+         "-input",
+         "s3://ml-treasuredata/result-20171117/*",
+         "-output",
+         "s3://ml-persona-reports/result-20171118"]
+  }
+]
