@@ -48,9 +48,11 @@ def main():
      
       keyword  = re.search(r'ipao9702=(.*?)&', dec)
       if keyword is not None:
-        keywords = [ 'SEARCH_' + keyword.group(1) ]
+        keywords = [ keyword for keyword in [ 'SEARCH_' + urllib.parse.unquote(keyword.group(1)).replace(' ', '^') ] if keyword != 'SEARCH_' ]
       else:
         keywords = [ 'META_' + m for m in re.findall(r'mtk=(.*?)&', dec) ]
+        # adhoc only search
+        keywords = []
 
       for key in keywords:
         tosave = {'tuuid':tuuid, 'data_owner_id': data_owner_id, 'income': income, 'gender_age':gender_age}
