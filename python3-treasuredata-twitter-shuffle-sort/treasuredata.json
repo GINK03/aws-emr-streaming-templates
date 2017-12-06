@@ -1,0 +1,18 @@
+[
+  {
+     "Name": "TreasureData",
+     "Type": "STREAMING",
+     "ActionOnFailure": "CONTINUE",
+     "Args": [
+         "-files",
+         "s3://trendliner-twitter-ver2-mapred/mapred/mapper.py,s3://trendliner-twitter-ver2-mapred/mapred/reducer.py",
+         "-mapper",
+         "mapper.py",
+         "-reducer",
+         "reducer.py",
+         "-input",
+         "s3://trendliner-twitter-ver2-raw/*",
+         "-output",
+         "s3://trendliner-twitter-ver2"]
+  }
+]
