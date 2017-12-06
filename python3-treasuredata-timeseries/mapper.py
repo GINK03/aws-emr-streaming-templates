@@ -19,12 +19,13 @@ def main():
       line = line.strip()
       obj  = json.loads( line )
       data_owner_id = obj['data_owner_id']
-      '''skip suumo(6517)'''
-      if data_owner_id == 6517 or data_owner_id is None:
+      if data_owner_id is None:
         continue
       #gender_age = obj['gender_age']
       tuuid = obj['tuuid']
-      if tuuid == None or tuuid == 'null' or tuuid == 'opt-out':
+      if tuuid == 'opt-out':
+        continue
+      if tuuid == None or tuuid == 'null':
         ''' if there is no tuuid, fill tuuid filed as ip-addr + browser '''
         try:
           tuuid =  'sha256_' + hashlib.sha256( bytes(obj['ip'] + obj['useragent'],'utf8') ).hexdigest()
