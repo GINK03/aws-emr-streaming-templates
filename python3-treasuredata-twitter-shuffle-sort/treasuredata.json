@@ -13,6 +13,6 @@
          "-input",
          "s3://trendliner-twitter-ver2-raw/*",
          "-output",
-         "s3://trendliner-twitter-ver2"]
+         "s3://trendliner-twitter-ver2/20171207"]
   }
 ]
